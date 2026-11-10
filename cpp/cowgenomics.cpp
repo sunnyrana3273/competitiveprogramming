@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -12,19 +13,43 @@ int main(){
 
   cin >> n >> m;
 
-  vector<vector<char>> spotty;
-  vector<vector<char>> plain;
+  int numCows = 2*n;
   
-  for (int i = 0; i < 2*n; i++){
-    if (i < n){
-      for (int j = 0; j < m; j++){
+  vector<string> spottyGenes;
+  vector<string> normalGenes;
 
-      }
-    }
-    else if (i >= n && i < 2*n){
+  for (int i = 0; i < numCows; i++) {
+    string temp;
+    cin >> temp;
 
+    if (i < n) {
+      spottyGenes.push_back(temp);
+    } else {
+      normalGenes.push_back(temp);
     }
   }
+  
+  // i = genome sequence
+  // j = spotty cow index 
+  // k = normal cow index 
+  for (int i = 0; i < m; i++) {
+    bool unique = true;
+
+    for (int j = 0; j < n; j++) {
+      for (int k = 0; k < n; k++) {
+        if (normalGenes[k][i] == spottyGenes[j][i]) {
+          unique = false;
+        }
+      }
+  
+    }
+
+    if (unique) {
+      count++;
+    }
+  }
+
+  cout << count << endl;
 
   return 0;
 }
